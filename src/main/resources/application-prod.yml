@@ -1,0 +1,26 @@
+server:
+  port: 9090
+  servlet:
+    context-path: /banking
+
+spring:
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: ${MYSQL_CONNECTION_STRING}
+    password: my_root_pass
+  jpa:
+    show-sql: true
+    defer-datasource-initialization: true
+    hibernate:
+      ddl-auto: update
+    generate-ddl: true
+
+bbdc:
+  jwt:
+    expiration: 9000000
+  jwk:
+    jks-file: /app/bbdctoken.jks
+    password:
+      key-store: ${JKS_STORE_PASS}
+      key-pass: ${JKS_KEY_PASS}
+    alias: bbdctoken

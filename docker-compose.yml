@@ -1,0 +1,35 @@
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql
+    environment:
+      MYSQL_DATABASE: bradesco
+      MYSQL_ROOT_PASSWORD: my_root_pass
+    ports:
+      - '3417:3306'
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - spring-boot-mysql
+
+  app:
+    build: .
+    container_name: spring-boot
+    ports:
+      - '9070:8080'
+    environment:
+      - MYSQL_CONNECTION_STRING=jdbc:mysql://mysql:3306/bradesco?user=root
+      - SPRING_DATASOURCE_PASSWORD=my_root_pass
+      - JKS_KEY_PASS=bradesco_keypass
+      - JKS_STORE_PASS=bradesco_storepass
+    depends_on:
+      - mysql
+    networks:
+      - spring-boot-mysql
+
+volumes:
+  mysql-data:
+
+networks:
+  spring-boot-mysql:
+    driver: bridge

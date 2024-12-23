@@ -1,0 +1,19 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:bykerack
+    username: sa
+    password: bbdc4
+    driverClassName: org.h2.Driver
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+
+bbdc:
+  jwt:
+    expiration: 9000000
+  jwk:
+    jks-file: src/test/resources/test.jks
+    password:
+      key-store: storePass
+      key-pass: keyPass
+    alias: alias
